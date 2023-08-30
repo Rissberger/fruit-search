@@ -1,74 +1,50 @@
-const button = document.getElementById('button')
-button.setAttribute('click', 'submit')
-
-const input = document.querySelector('#fruit');
+const input = document.querySelector('#searchBox');
 const suggestions = document.querySelector('.suggestions ul');
 
 const fruit = ['Apple', 'Apricot', 'Avocado 🥑', 'Banana', 'Bilberry', 'Blackberry', 'Blackcurrant', 'Blueberry', 'Boysenberry', 'Currant', 'Cherry', 'Coconut', 'Cranberry', 'Cucumber', 'Custard apple', 'Damson', 'Date', 'Dragonfruit', 'Durian', 'Elderberry', 'Feijoa', 'Fig', 'Gooseberry', 'Grape', 'Raisin', 'Grapefruit', 'Guava', 'Honeyberry', 'Huckleberry', 'Jabuticaba', 'Jackfruit', 'Jambul', 'Juniper berry', 'Kiwifruit', 'Kumquat', 'Lemon', 'Lime', 'Loquat', 'Longan', 'Lychee', 'Mango', 'Mangosteen', 'Marionberry', 'Melon', 'Cantaloupe', 'Honeydew', 'Watermelon', 'Miracle fruit', 'Mulberry', 'Nectarine', 'Nance', 'Olive', 'Orange', 'Clementine', 'Mandarine', 'Tangerine', 'Papaya', 'Passionfruit', 'Peach', 'Pear', 'Persimmon', 'Plantain', 'Plum', 'Pineapple', 'Pomegranate', 'Pomelo', 'Quince', 'Raspberry', 'Salmonberry', 'Rambutan', 'Redcurrant', 'Salak', 'Satsuma', 'Soursop', 'Star fruit', 'Strawberry', 'Tamarillo', 'Tamarind', 'Yuzu'];
-searchBar.addEventListener('keyup', (e) => {
-    let input = e.target.value;
-    let matches = filterFruits(input);
-    resetDropdown();
-    populateDropdown(matches);
+
+input.addEventListener('input', function() {
+	const query = this.value;
+	const results = search(query);
+	
+	suggestions.innerHTML = ''; // Clear previous results
+	
+	results.forEach(fruit => {
+	  const listItem = document.createElement('li');
+	  listItem.textContent = fruit;
+	  suggestions.appendChild(listItem);
+	});
+
 });
 
-// Event listener for dropdown list items
-dropdown.addEventListener('click', (e) => {
-    if (e.target.tagName === 'LI') {
-        searchBar.value = e.target.innerText;
-        resetDropdown();
-        initiateSearch();
-    }
-});
-
-// Event listener to hide dropdown on focus out
-searchBar.addEventListener('focusout', () => {
-    resetDropdown();
-});
-function search(str) {
-    let results = [];
-    // TODO
-    return results;
+function search(e) {
+	const results = fruit.filter(item => 
+	  item.toLowerCase().includes(e.toLowerCase())
+	);
+	return results;
 }
 
-function searchHandler(e) {
-    // TODO
+function highlightSuggestion(e) {
+  if (e.target.tagName === 'LI') {
+    e.target.classList.add('highlighted');
+  }
 }
 
-function showSuggestions(results, inputVal) {
-    // TODO
+function unhighlightSuggestion(e) {
+  if (e.target.tagName === 'LI') {
+    e.target.classList.remove('highlighted');
+  }
 }
 
 function useSuggestion(e) {
-    // TODO
+  if (e.target.tagName === 'LI') {
+    const selectedFruit = e.target.textContent;
+    document.getElementById('searchBox').value = selectedFruit;
+	suggestions.innerHTML = ''; // Clear previous results
+
+  }
 }
 
-input.addEventListener('keyup', searchHandler);
-suggestions.addEventListener('click', useSuggestion);
-
-// Function to fetch suggestions based on input
-function fetchSuggestions(query) {
-    const regex = new RegExp(query, 'i');
-    return fruit.filter(f => f.match(regex));
-}
-
-// Handle input event to show suggestions
-document.getElementById('fruit').addEventListener('input', function() {
-    const inputVal = this.value;
-    if (inputVal) {
-        const suggestions = fetchSuggestions(inputVal);
-        const datalist = document.getElementById('fruitSuggestions');
-        datalist.innerHTML = '';  // clear previous suggestions
-        suggestions.forEach(suggestion => {
-            const option = document.createElement('option');
-            option.value = suggestion;
-            datalist.appendChild(option);
-        });
-    }
-});
-
-// Handle form submission
-document.getElementById('searchForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    console.log('Search initiated for:', document.getElementById('fruit').value);
-});
+document.getElementById('results').addEventListener('mouseover', highlightSuggestion);
+document.getElementById('results').addEventListener('mouseout', unhighlightSuggestion);
+document.getElementById('results').addEventListener('click', useSuggestion);

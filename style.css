@@ -1,59 +1,13 @@
-* {
-    /* box-sizing: border-box; */
-  }
-  
-  :focus {
-   /* TODO */
-  }
-  
+
   body {
-      background: linear-gradient(to right, #FF5F6D, #FFC371);
-    /* TODO */
+      background: linear-gradient(to right, #eeee03, #d94602);
   }
-  
-  input {
-   /* TODO */
-  }
-  
   .search-container {
-   /* TODO */
-  }
-  .search-container input,
-  .search-container .suggestions {
-    /* TODO */
-  }
-  .search-container input {
-   /* TODO */
-  }
-  .search-container .suggestions {
-     /* TODO */
-  }
-  
-  ul {
-    /* TODO */
-  }
-  ul.has-suggestions {
-    /* TODO */
-  }
-  ul li {
-    /* TODO */
-  }
-  ul li:hover {
-    /* TODO */
-  }
-  
-  input {
-     /* TODO */
-  }
-  
-  datalist option:hover {
-      background-color: #f0f0f0;
-  }
-  
-  .search-container {
-      width: 300px;
+      width: 400px;
       margin: 50px auto;
       position: relative;
+      top: calc(100vh/2 - 50px);
+      
   }
   
   #fruit {
@@ -63,18 +17,34 @@
       border: 1px solid #ddd;
       background: #fff;
   }
-  
-  button {
-      padding: 10px 15px;
-      border: none;
-      background-color: #FF5F6D;
-      color: #fff;
-      cursor: pointer;
-      border-radius: 5px;
-      margin-left: 10px;
-  }
-  
-  button:hover {
-      background-color: #FFC371;
-  }
-  
+
+ 
+  /* Dropdown styling */
+#results {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  max-height: 150px;
+  overflow-y: auto;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  background-color: transparent;
+  padding-inline-start: 0px;
+}
+
+#results li {
+  padding: 8px;
+  cursor: pointer;
+  list-style-type: none;
+  margin-left: 0;
+}
+
+
+#searchBox, #results {
+  width: 100%;
+}
+.highlighted {
+  background-color: #f95700;
+  cursor: pointer;
+}
+

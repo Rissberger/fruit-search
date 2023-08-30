@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Fruit Autocomplete</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-<link rel="stylesheet" href="./style.css">
-
+    <meta charset="UTF-8">
+    <title>Fruit Autocomplete</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+    <div class="search-container">
+        <form id="searchForm">
+            <input type="text" name="fruit" id="fruit" placeholder="Search fruit 🍎" list="fruitSuggestions">
+            <datalist id="fruitSuggestions"></datalist>
+            <button type="submit">Search Fruit</button>
+        </form>
+        <!-- The ul can be used for additional display of suggestions or results, if needed -->
+        <ul></ul>
+    </div>
 
-  <div class="search-container">
-	<input type="text" name="fruit" id="searchBox" placeholder="Search fruit 🍎">
-	<div class="suggestions">
-		<ul id="results"></ul>
-	</div>
-</div>
-  <script  src="./script.js"></script>
-
+    <script src="./script.js"></script>
 </body>
 </html>
